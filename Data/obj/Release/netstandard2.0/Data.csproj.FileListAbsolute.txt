@@ -1,0 +1,8 @@
+C:\Projetos\easy-hotel-project\Data\bin\Release\netstandard2.0\Data.deps.json
+C:\Projetos\easy-hotel-project\Data\bin\Release\netstandard2.0\Data.dll
+C:\Projetos\easy-hotel-project\Data\bin\Release\netstandard2.0\Data.pdb
+C:\Projetos\easy-hotel-project\Data\obj\Release\netstandard2.0\Data.csproj.CoreCompileInputs.cache
+C:\Projetos\easy-hotel-project\Data\obj\Release\netstandard2.0\Data.AssemblyInfoInputs.cache
+C:\Projetos\easy-hotel-project\Data\obj\Release\netstandard2.0\Data.AssemblyInfo.cs
+C:\Projetos\easy-hotel-project\Data\obj\Release\netstandard2.0\Data.dll
+C:\Projetos\easy-hotel-project\Data\obj\Release\netstandard2.0\Data.pdb

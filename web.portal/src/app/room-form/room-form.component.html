@@ -1,0 +1,74 @@
+<h1>Novo Quarto</h1>
+<p>
+  {{!f.valid }} - {{room.beds?.length <= 0}} - {{room.beds?.length}}
+</p>
+<form #f="ngForm" (ngSubmit)="submit(f)" novalidate>
+  <div class="form-group">
+    <label for="doorNumber">Número do apartamento</label>
+    <input type="text" class="form-control" id="doorNumber" name="doorNumber" [(ngModel)]="room.doorNumber" required #doorNumber="ngModel">
+    <div class="alert alert-danger" *ngIf="doorNumber.touched && !doorNumber.valid">Por favor preencha o número do apartamento.</div>
+  </div>
+  <div class="form-group">
+    <label for="floorNumber">Andar do apartamento</label>
+    <input type="text" class="form-control" id="floorNumber" name="floorNumber" [(ngModel)]="room.floorNumber" required #floorNumber="ngModel">
+    <div class="alert alert-danger" *ngIf="floorNumber.touched && !floorNumber.valid">Por favor preencha o andar do apartamento.</div>
+  </div>
+  <div class="form-group">
+    <label for="roomDescription">Descrição do apartamento</label>
+    <input type="text" class="form-control" id="roomDescription" name="roomDescription" [(ngModel)]="room.roomDescription">
+  </div>
+  <div class="form-group">
+    <label for="roomType">Tipo do quarto</label>
+    <select id="roomType" class="form-control" [(ngModel)]="room.roomTypeId" name="roomType" required #roomType="ngModel">
+      <option value=""></option>
+      <option *ngFor="let m of roomTypes" value="{{ m.id }}">{{ m.name }}</option>
+    </select>
+    <div class="alert alert-danger" *ngIf="roomType.touched && !roomType.valid">Selecione um tipo de quarto.</div>
+  </div>
+  <div class="form-group">
+    <label for="roomState">Estado do quarto</label>
+    <select id="roomState" class="form-control" [(ngModel)]="room.roomStateId" name="roomState" required #roomState="ngModel">
+      <option value=""></option>
+      <option *ngFor="let m of roomStates" value="{{ m.id }}">{{ m.name }}</option>
+    </select>
+    <div class="alert alert-danger" *ngIf="roomState.touched && !roomState.valid">Por favor selecione o estado do quarto.</div>
+  </div>
+  <h5>Configuração do apartamento</h5>
+  <hr>
+
+  <div class="form-group">
+    <label>Camas</label>
+    <div class="input-group">
+      <select id="select" name="bedId" class="form-control" [(ngModel)]="selectedBed.bedId">
+        <option value="null">Selecione</option>
+        <option *ngFor="let obj of beds" [value]="obj.id">{{obj.name}}</option>
+      </select>
+      <input type="text" name="numberBeds" class="form-control" [(ngModel)]="selectedBed.numberBeds" placeholder="Qtd. da cama">
+{{selectedBed.bedId == "null"}}
+      <span class="input-group-btn">
+
+        <button type="button" class="btn btn-primary" [disabled]='selectedBed.bedId == "null" || selectedBed.numberBeds == ""' 
+                (click)="addBedtoRoom(selectedBed.bedId, selectedBed.numberBeds)">Adicionar</button>
+      </span>
+    </div>
+  </div>
+  <div class="form-group" *ngIf="selectedBeds.length > 0">
+
+    <div class="form-group">
+      <label>Camas adicionadas </label>
+      <select id="select" name="camas" class="form-control form-control-lg" size="5" multiple>
+        <option *ngFor="let obj of selectedBeds" [value]="obj.id">{{obj.name}} qtd. {{obj.numberBeds}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group" *ngIf="selectedBeds.length > 0">
+
+    <div class="form-group">
+      <label>Apagar camas </label>
+      <button type="button" class="btn btn-danger" (click)="resertBeds()">Apagar</button>
+    </div>
+  </div>
+
+  <button class="btn btn-primary" [disabled]="!f.valid || room.beds?.length <= 0">Salvar</button>
+  <button *ngIf="room.id" class="btn btn-danger" type="button" (click)="delete()">Apagar</button>
+</form>

@@ -1,0 +1,23 @@
+<div class="card-header d-flex justify-content-between">
+  <h4 class="my-0 font-weight-normal">Alterar quarto</h4>
+  <div class="btn-toolbar mb-2 mb-md-0">
+    <button class="btn btn-sm btn-outline-success arrow-left" [disabled]="!room.valid" (click)="enableDisableRoomEdit()">
+      <span data-feather="calendar"></span>
+      Salvar
+    </button>
+  </div>
+</div>
+<div class="card-body">
+  <div class="col-lg-7">
+    <dl class="row">
+      <dt class="col-2">Quartos disponíveis:</dt>
+      <dd class="col-2">
+        <select id="room" class="form-control" [(ngModel)]="room.id" name="room" required #room="ngModel">
+          <option value=""></option>
+          <option *ngFor="let m of rooms" value="{{ m.id }}">{{ m.doorNumber }}</option>
+        </select>
+        <div class="alert alert-danger" *ngIf="room.touched && !room.valid">Selecione um quarto.</div>
+      </dd>
+    </dl>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+C:\Projetos\easy-hotel-project\api.book\bin\Release\netcoreapp2.0\api.book.deps.json
+C:\Projetos\easy-hotel-project\api.book\bin\Release\netcoreapp2.0\api.book.runtimeconfig.json
+C:\Projetos\easy-hotel-project\api.book\bin\Release\netcoreapp2.0\api.book.runtimeconfig.dev.json
+C:\Projetos\easy-hotel-project\api.book\bin\Release\netcoreapp2.0\api.book.dll
+C:\Projetos\easy-hotel-project\api.book\bin\Release\netcoreapp2.0\api.book.pdb
+C:\Projetos\easy-hotel-project\api.book\bin\Release\netcoreapp2.0\Data.dll
+C:\Projetos\easy-hotel-project\api.book\bin\Release\netcoreapp2.0\Data.pdb
+C:\Projetos\easy-hotel-project\api.book\obj\Release\netcoreapp2.0\api.book.csprojResolveAssemblyReference.cache
+C:\Projetos\easy-hotel-project\api.book\obj\Release\netcoreapp2.0\api.book.csproj.CoreCompileInputs.cache
+C:\Projetos\easy-hotel-project\api.book\obj\Release\netcoreapp2.0\api.book.AssemblyInfoInputs.cache
+C:\Projetos\easy-hotel-project\api.book\obj\Release\netcoreapp2.0\api.book.AssemblyInfo.cs
+C:\Projetos\easy-hotel-project\api.book\obj\Release\netcoreapp2.0\api.book.dll
+C:\Projetos\easy-hotel-project\api.book\obj\Release\netcoreapp2.0\api.book.pdb

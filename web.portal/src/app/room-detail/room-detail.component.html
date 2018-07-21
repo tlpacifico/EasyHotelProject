@@ -1,0 +1,29 @@
+<div class="card-header d-flex justify-content-between">
+  <h4 class="my-0 font-weight-normal"> Dados do apartamento: {{room.doorNumber}}</h4>
+  <div class="btn-toolbar mb-2 mb-md-0" *ngIf="flEdit">
+    <button class="btn btn-sm btn-outline-warning arrow-left" (click)="enableDisableRoomEdit()">
+      <span data-feather="calendar"></span>
+      Alterar quarto
+    </button>
+  </div>
+</div>
+<div class="card-body" *ngIf="room.roomState != null">
+  <div class="col-lg-7">
+    <dl class="row">
+      <dt class="col-2">Tipo:</dt>
+      <dd class="col-2">{{room.roomType.name}}</dd>
+      <dt class="col-2">Situação:</dt>
+      <dd class="col-2"> {{room.roomState.name}}</dd>
+      <dt class="col-2">Descrição:</dt>
+      <dd class="col-2">{{room.roomDescription}}</dd>
+      <dt class="col-2">Andar:</dt>
+      <dd class="col-2">{{room.floorNumber}}</dd>
+      <dt class="col-2">Camas:</dt>
+      <dd class="col-auto">
+        <li *ngFor="let bed of room.beds">
+          {{bed.name}} - {{bed.numberBeds}}
+        </li>
+      </dd>
+    </dl>
+  </div>
+</div>
