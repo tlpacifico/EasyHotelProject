@@ -6554,11 +6554,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Projetos\\easy-hotel-project\\Data\\Data.csproj",
+      "projectUniqueName": "C:\\Users\\thaci\\Desktop\\easy-hotel-project\\Data\\Data.csproj",
       "projectName": "Data",
-      "projectPath": "C:\\Projetos\\easy-hotel-project\\Data\\Data.csproj",
+      "projectPath": "C:\\Users\\thaci\\Desktop\\easy-hotel-project\\Data\\Data.csproj",
       "packagesPath": "C:\\Users\\thaci\\.nuget\\packages\\",
-      "outputPath": "C:\\Projetos\\easy-hotel-project\\Data\\obj\\",
+      "outputPath": "C:\\Users\\thaci\\Desktop\\easy-hotel-project\\Data\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

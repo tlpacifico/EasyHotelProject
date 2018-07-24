@@ -14057,11 +14057,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Projetos\\easy-hotel-project\\api.book\\api.book.csproj",
+      "projectUniqueName": "C:\\Users\\thaci\\Desktop\\easy-hotel-project\\api.book\\api.book.csproj",
       "projectName": "api.book",
-      "projectPath": "C:\\Projetos\\easy-hotel-project\\api.book\\api.book.csproj",
+      "projectPath": "C:\\Users\\thaci\\Desktop\\easy-hotel-project\\api.book\\api.book.csproj",
       "packagesPath": "C:\\Users\\thaci\\.nuget\\packages\\",
-      "outputPath": "C:\\Projetos\\easy-hotel-project\\api.book\\obj\\",
+      "outputPath": "C:\\Users\\thaci\\Desktop\\easy-hotel-project\\api.book\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -14080,8 +14080,8 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "C:\\Projetos\\easy-hotel-project\\Data\\Data.csproj": {
-              "projectPath": "C:\\Projetos\\easy-hotel-project\\Data\\Data.csproj"
+            "C:\\Users\\thaci\\Desktop\\easy-hotel-project\\Data\\Data.csproj": {
+              "projectPath": "C:\\Users\\thaci\\Desktop\\easy-hotel-project\\Data\\Data.csproj"
             }
           }
         }

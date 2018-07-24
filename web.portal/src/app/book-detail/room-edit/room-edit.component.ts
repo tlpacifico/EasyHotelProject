@@ -1,4 +1,8 @@
-import { Component, OnInit, Input, Output,EventEmitter  } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { BookService } from './../../shared/service/book.services';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { RoomService } from '../../shared/service/room.service';
 
 
 @Component({
@@ -7,21 +11,49 @@ import { Component, OnInit, Input, Output,EventEmitter  } from '@angular/core';
 })
 
 export class RoomEditComponent implements OnInit {
-    @Input() public room: any;
-    @Output() public flRoomEdit = new EventEmitter<boolean>();
-    public rooms : any;
-    constructor() { }
+
+    @Output() public roomEdit = new EventEmitter<any>();
+    public rooms: any;
+    private readonly PAGE_SIZE = 30;
+    private roomSelected: number;
+    private bookId: number;
+    queryResult: any = {};
+    query: any = {
+        pageSize: this.PAGE_SIZE,
+        isSortAscending: true,
+        sortBy: 'doorNumber',
+        roomStateId: 1
+    };
+    constructor(private roomService: RoomService,
+        private bookService: BookService,
+        private toastr: ToastrService,
+        private route: ActivatedRoute) 
+        {
+        route.params.subscribe(p => {
+            this.bookId = +p['bookId'];
+        });
+    }
 
     ngOnInit() {
-        if (!this.room) 
-             throw new Error('Missing room data!'); 
-                
-        this.rooms = [{id:1, doorNumber:"001"},{id:2, doorNumber:"101"},{id:3, doorNumber:"104"},{id:6, doorNumber:"119"}]   
-      }
 
-      enableDisableRoomEdit(){
-          this.flRoomEdit.emit(false);
-      }
+        this.roomService.getRooms(this.query)
+            .subscribe(result => this.queryResult = result)
 
-   
+    }
+
+    hideRoomEdit(room: any) {
+        this.roomEdit.emit(room);
+    }
+
+    save() {
+        var room = this.queryResult.items.find(m => m.id == this.roomSelected);
+        this.bookService.changeRoom(this.bookId, this.roomSelected)
+        .subscribe(res => {
+            this.toastr.success('Quarto alterado.', 'Sucesso!'); 
+            this.hideRoomEdit(room);         
+        })
+      
+    }
+
+
 }

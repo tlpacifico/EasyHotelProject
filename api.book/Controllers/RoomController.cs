@@ -7,6 +7,8 @@ using Data.Core.Domain;
 using Microsoft.AspNetCore.Mvc;
 using book.api.Controllers.Mapping.Resources;
 using Microsoft.AspNetCore.Cors;
+using Data.Infrastructure;
+using Data.Infrastructure.Extensions;
 
 namespace book.api.Controllers
 {
@@ -23,10 +25,10 @@ namespace book.api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetRooms()
+        public async Task<IActionResult> GetRooms(RoomQuery query)
         {
-            var rooms = await unitOfWork.Rooms.GetRooms();
-            return Ok(mapper.Map<IEnumerable<Room>, IEnumerable<RoomResource>>(rooms.OrderBy(r => r.DoorNumber)));
+            var rooms = await unitOfWork.Rooms.GetRooms(query);
+            return Ok(mapper.Map<QueryResult<Room>, QueryResult<RoomResource>>(rooms));
         }
 
         [HttpPost]

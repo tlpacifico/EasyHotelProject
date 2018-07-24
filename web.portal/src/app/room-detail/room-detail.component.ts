@@ -9,7 +9,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class RoomDetailComponent implements OnInit {
     @Input() public room: any;
     @Input() public flEdit: boolean = false;
-    @Output() public flRoomEdit = new EventEmitter<boolean>();
+    @Output() public showRoomEdit = new EventEmitter<boolean>();
     constructor() { }
 
     ngOnInit() {
@@ -17,7 +17,7 @@ export class RoomDetailComponent implements OnInit {
       }
 
       enableDisableRoomEdit(){
-        this.flRoomEdit.emit(true);
+        this.showRoomEdit.emit(true);
       }
 
      

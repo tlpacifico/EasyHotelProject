@@ -1,3 +1,4 @@
+import { DayRoomComponent } from './book-detail/dayroom-detail/dayroom-detail.component';
 
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -22,6 +23,7 @@ import { RoomDetailComponent} from './room-detail/room-detail.component';
 import { BookFormComponent } from './book-form/book-form.component';
 import { BookDetailsComponent } from './book-detail/book-details.component';
 import { RoomEditComponent } from './book-detail/room-edit/room-edit.component';
+import { GuestListComponent } from './book-detail/guest-list/guest-list.component';
 
 
 
@@ -37,7 +39,9 @@ import { RoomEditComponent } from './book-detail/room-edit/room-edit.component';
     RoomListComponent,
     BookFormComponent,
     BookDetailsComponent,
-    RoomEditComponent
+    RoomEditComponent,
+    GuestListComponent,
+    DayRoomComponent
   ],
   imports: [
     BrowserModule,   

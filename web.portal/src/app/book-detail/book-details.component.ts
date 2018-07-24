@@ -14,6 +14,8 @@ import 'moment/locale/pt-br';
 export class BookDetailsComponent implements OnInit {
   book: any = {};
   public flRoomEdit: boolean;
+  public flEditGuest : boolean;
+  public flEditBook : boolean;
 
   constructor(private bookService: BookService,
     private roomService: RoomService,
@@ -28,16 +30,41 @@ export class BookDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.flRoomEdit = false;
+    this.flEditGuest = false;
+    this.flEditBook = true;
+    this.getBook();
+  }
+
+  private getBook() {
     this.bookService.getBook(this.book.id)
       .subscribe((res) => {
         this.book = res;
         this.book.checkIn = moment(this.book.checkIn).format('DD/MM/YYYY HH:MM:SS');
         this.book.checkOut = moment(this.book.checkOut).format('DD/MM/YYYY HH:MM:SS');
-      })
+      });
   }
 
   enableDisableRoomEdit(flShow: boolean) {   
     this.flRoomEdit = flShow;
   }
+
+  hideRoomEdit(room: any){
+    if(room)  
+      this.book.room = room;
+      
+    this.flRoomEdit = false;
+  }
+
+  newDayRoom(){
+    this.bookService.createDayRoom(this.book.id)
+          .subscribe(res => {
+            this.toastr.success('Nova diária criada.', 'Sucesso!'); 
+            this.book = res;
+            this.book.checkIn = moment(this.book.checkIn).format('DD/MM/YYYY HH:MM:SS');
+            this.book.checkOut = moment(this.book.checkOut).format('DD/MM/YYYY HH:MM:SS');
+          })
+  }
+
+
 
 }

@@ -29,8 +29,8 @@ export class RoomService {
         return this.http.get(this.configEndpoint+"beds");
       }
 
-      getRooms() {        
-        return this.http.get<any>(this.roomEndpoint);
+      getRooms(query:any) {        
+        return this.http.get<any>(this.roomEndpoint +'?' + this.toQueryString(query));
       }
 
       getRoom(id:number) {
@@ -44,4 +44,15 @@ export class RoomService {
     update(room: SaveRoom){
         return this.http.put(this.roomEndpoint + room.id, room);
      }
+
+     toQueryString(obj) {
+      var parts = [];
+      for (var property in obj) {
+        var value = obj[property];
+        if (value != null && value != undefined) 
+          parts.push(encodeURIComponent(property) + '=' + encodeURIComponent(value));
+      }
+  
+      return parts.join('&');
+    }
 }

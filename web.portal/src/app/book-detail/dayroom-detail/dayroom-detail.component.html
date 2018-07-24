@@ -1,0 +1,69 @@
+<div class="card mb-12 box-shadow">
+  <div class="card-header d-flex justify-content-between">
+    <h4 class="my-0 font-weight-normal"> Estadia</h4>
+    <div class="btn-toolbar mb-2 mb-md-0">
+      <button class="btn btn-sm btn-outline-warning" *ngIf="flEdit" (click)="onEdit()">
+        <span data-feather="calendar"></span>
+        Alterar estadia
+      </button>
+      <button class="btn btn-sm btn-outline-secondary" *ngIf="!flEdit" (click)="onEdit()">
+        <span data-feather="calendar"></span>
+        Cancelar
+      </button>
+      <button class="btn btn-sm btn-outline-success" *ngIf="!flEdit" (click)="save()">
+        <span data-feather="calendar"></span>
+        Salvar
+      </button>
+    </div>
+  </div>
+
+  <div class="card-body">
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="apto">Apartamento</label>
+        <input type="text" id="apto" readonly class="form-control-plaintext" [value]="book.room.doorNumber" *ngIf="flEdit">
+        <select id="room" class="form-control" [(ngModel)]="roomSelected" name="room" required #room="ngModel" *ngIf="!flEdit">
+          <option value=""></option>
+          <option *ngFor="let m of queryResult.items" value="{{ m.id }}">{{ m.doorNumber }}</option>
+        </select>
+      </div>
+      <div class="form-group col-md-4">
+        <label for="apto">Andar</label>
+        <input type="text" id="apto" readonly class="form-control-plaintext" [value]="book.room.floorNumber">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="apto">Tipo</label>
+        <input type="text" id="apto" readonly class="form-control-plaintext" [value]="book.room.roomType.name">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="checkIn">Check-In</label>
+        <input type="text" id="checkIn" readonly class="form-control-plaintext" [(ngModel)]="book.checkIn">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="checkOut">Check-Out</label>
+        <input type="text" id="checkOut" [readonly]=flEdit [(ngModel)]="book.checkOut" [textMask]="{mask: maskDateTime}" [ngClass]="{'form-control-plaintext': flEdit ===true, 'form-control': flEdit===false}">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="checkIn">Total Conta</label>
+        <input type="text" id="" readonly class="form-control" [(ngModel)]="book.totalBill" class="form-control-plaintext">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="checkIn">Diárias</label>
+        <input type="text" id="" [readonly]=flEdit class="form-control-plaintext" [(ngModel)]="book.dayRooms.length">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="roomRate">Valor quarto</label>
+        <input type="text" id="roomRate" [readonly]=flEdit class="form-control" [(ngModel)]="book.roomRate" [ngClass]="{'form-control-plaintext': flEdit ===true, 'form-control': flEdit===false}">
+      </div>
+      <div class="form-group col-md-4">
+        <label for="guestNumer">Número de hospedes</label>
+        <input type="text" id="guestNumer" [readonly]=flEdit class="form-control" [(ngModel)]="book.guestNumber" [ngClass]="{'form-control-plaintext': flEdit ===true, 'form-control': flEdit===false}">
+      </div>
+    </div>
+  </div>
+
+</div>

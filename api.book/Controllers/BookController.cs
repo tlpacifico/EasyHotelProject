@@ -10,10 +10,11 @@ using Microsoft.AspNetCore.Mvc;
 using book.api.Controllers.Mapping.Resources;
 using Microsoft.AspNetCore.Cors;
 using Data.Enum;
+using api.book.Util;
 
 namespace book.api.Controllers
 {
-    
+
     [Route("/api/books")]
     public class BookController : Controller
     {
@@ -39,15 +40,15 @@ namespace book.api.Controllers
             return Ok(mapper.Map<Book, BookResource>(book));
         }
 
-       
+
         [HttpPost]
         public async Task<IActionResult> CreateBook([FromBody] SaveBookResource bookResource)
         {
-            if (!ModelState.IsValid && 
-                    ( bookResource.Guests.Count <= 0|| bookResource.NewGuests.Count <=0))
+            if (!ModelState.IsValid &&
+                    (bookResource.Guests.Count <= 0 || bookResource.NewGuests.Count <= 0))
                 return BadRequest(ModelState);
 
-          
+
             if (bookResource.NewGuests != null && bookResource.NewGuests.Count > 0)
             {
                 var newGuest = mapper.Map<IEnumerable<GuestResource>, IEnumerable<Guest>>(bookResource.NewGuests);
@@ -60,7 +61,7 @@ namespace book.api.Controllers
             }
 
             var book = mapper.Map<SaveBookResource, Book>(bookResource);
-          
+
 
             book.DayRooms.Add(new DayRoom
             {
@@ -71,7 +72,7 @@ namespace book.api.Controllers
                 PaymentFlag = false
             });
             unitOfWork.Books.Add(book);
-            
+
             var room = await unitOfWork.Rooms.Get(book.RoomId);
             room.CurrentBookId = book.Id;
             room.RoomStateId = (int)RoomStateEnum.Occupied;
@@ -81,7 +82,7 @@ namespace book.api.Controllers
             return Ok(mapper.Map<Book, BookResource>(result));
         }
 
-        [HttpGet("{bookId}/dayroom")]
+        [HttpPut("{bookId}/dayroom")]
         public async Task<IActionResult> CreateDayRoom(int bookId)
         {
             var book = await unitOfWork.Books.GetBook(bookId);
@@ -103,10 +104,90 @@ namespace book.api.Controllers
             };
 
             book.DayRooms.Add(newDayRoom);
-            Room room = await unitOfWork.Rooms.Get(book.RoomId);
-            room.RoomStateId = 2;
+            book.TotalBill += book.RoomRate;
             await unitOfWork.CompleteAsync();
             return Ok(mapper.Map<Book, BookResource>(book));
+        }
+
+        [HttpPut("{bookId}/room/{roomId}")]
+        public async Task<IActionResult> ChangeRoom(int bookId, int roomId)
+        {
+            var book = await unitOfWork.Books.GetBook(bookId);
+            var room = await unitOfWork.Rooms.Get(roomId);
+            if (book == null || room == null)
+                return NotFound();
+
+            await ChangeRoom(book, room);
+
+            await unitOfWork.CompleteAsync();
+
+            return Ok(mapper.Map<Book, BookResource>(book));
+        }
+
+        [HttpPut("{bookId}")]
+        public async Task<IActionResult> UpdateBook(int bookId, [FromBody] SaveBookResource bookResource)
+        {
+            var book = await unitOfWork.Books.GetBook(bookId);
+            var room = await unitOfWork.Rooms.Get(bookResource.RoomId);
+            if (book == null || room == null)
+                return NotFound();
+
+            if (book.RoomId != bookResource.RoomId)
+                await ChangeRoom(book, room);
+
+            book.GuestNumber = bookResource.GuestNumber;
+            book.RoomRate = bookResource.RoomRate;
+            book.CheckOut = ParseString.ParseStringToDateTime(bookResource.CheckOut);
+
+            await unitOfWork.CompleteAsync();
+
+            return Ok(mapper.Map<Book, BookResource>(book));
+        }
+
+        private async Task ChangeRoom(Book book, Room newRoom)
+        {
+            var oldRoom = await unitOfWork.Rooms.Get(book.RoomId);
+            oldRoom.RoomStateId = (int)RoomStateEnum.Free;
+            oldRoom.CurrentBookId = null;
+
+            newRoom.RoomStateId = (int)RoomStateEnum.Occupied;
+            newRoom.CurrentBookId = book.Id;
+            book.RoomId = newRoom.Id;
+        }
+
+        [HttpPut("{bookId}/guests")]
+        public async Task<IActionResult> ChangeGuests(int bookId, [FromBody] ChangeBookGuestsResource sbr)
+        {
+            var b = await unitOfWork.Books.GetBook(bookId);
+            if (b == null)
+                return NotFound();
+
+
+            var newGuest = mapper.Map<IEnumerable<GuestResource>, IEnumerable<Guest>>(sbr.NewGuests);
+            unitOfWork.Guests.AddRange(newGuest);
+
+            foreach (var item in newGuest)
+            {
+                sbr.Guests.Add(item.Id);
+            }
+
+            // Remove unselected guests
+            var guets = b.Guests.Where(f => !sbr.Guests.Any(x => x == f.GuestId)).ToList();
+            foreach (var f in guets)
+                b.Guests.Remove(f);
+
+            // Add new Guests
+            var addedGuets = sbr.Guests.Where(x => !b.Guests.Any(f => f.GuestId == x))
+                                        .Select(x => new GuestBook { GuestId = x }).ToList();
+            foreach (var f in addedGuets)
+                b.Guests.Add(f);
+
+
+            await unitOfWork.CompleteAsync();
+
+            b = await unitOfWork.Books.GetBook(bookId);
+
+            return Ok(mapper.Map<Book, BookResource>(b));
         }
     }
 }

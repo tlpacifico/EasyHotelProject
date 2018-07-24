@@ -7,3 +7,12 @@ C:\Projetos\easy-hotel-project\Data\obj\Debug\netstandard2.0\Data.AssemblyInfo.c
 C:\Projetos\easy-hotel-project\Data\obj\Debug\netstandard2.0\Data.dll
 C:\Projetos\easy-hotel-project\Data\obj\Debug\netstandard2.0\Data.pdb
 C:\Projetos\easy-hotel-project\Data\obj\Debug\netstandard2.0\Data.csprojAssemblyReference.cache
+C:\Users\thaci\Desktop\easy-hotel-project\Data\bin\Debug\netstandard2.0\Data.deps.json
+C:\Users\thaci\Desktop\easy-hotel-project\Data\bin\Debug\netstandard2.0\Data.dll
+C:\Users\thaci\Desktop\easy-hotel-project\Data\bin\Debug\netstandard2.0\Data.pdb
+C:\Users\thaci\Desktop\easy-hotel-project\Data\obj\Debug\netstandard2.0\Data.csprojAssemblyReference.cache
+C:\Users\thaci\Desktop\easy-hotel-project\Data\obj\Debug\netstandard2.0\Data.csproj.CoreCompileInputs.cache
+C:\Users\thaci\Desktop\easy-hotel-project\Data\obj\Debug\netstandard2.0\Data.AssemblyInfoInputs.cache
+C:\Users\thaci\Desktop\easy-hotel-project\Data\obj\Debug\netstandard2.0\Data.AssemblyInfo.cs
+C:\Users\thaci\Desktop\easy-hotel-project\Data\obj\Debug\netstandard2.0\Data.dll
+C:\Users\thaci\Desktop\easy-hotel-project\Data\obj\Debug\netstandard2.0\Data.pdb

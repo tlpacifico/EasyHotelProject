@@ -12,7 +12,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let r of rooms">
+      <tr *ngFor="let r of queryResult.items">
         <td>{{ r.doorNumber }}</td>
         <td>{{ r.floorNumber }}</td>
         <td>{{ r.roomType.name }}</td>
